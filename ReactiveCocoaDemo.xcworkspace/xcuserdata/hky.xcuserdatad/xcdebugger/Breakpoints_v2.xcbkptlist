@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReactiveCocoaDemo/login/controller/LoginViewController.m"
-            timestampString = "469533957.774886"
+            timestampString = "469596713.778089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
             landmarkName = "-KVOandNotificationAndTargetAction"
             landmarkType = "5">
             <Locations>
@@ -121,11 +121,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReactiveCocoaDemo/login/controller/LoginViewController.m"
-            timestampString = "469533957.774886"
+            timestampString = "469596713.778089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "387"
+            endingLineNumber = "387"
             landmarkName = "-channelTerminal"
             landmarkType = "5">
          </BreakpointContent>
@@ -137,11 +137,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReactiveCocoaDemo/login/controller/LoginViewController.m"
-            timestampString = "469533957.774886"
+            timestampString = "469596713.778089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "351"
+            endingLineNumber = "351"
             landmarkName = "-delegeTest"
             landmarkType = "5">
          </BreakpointContent>
@@ -153,11 +153,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReactiveCocoaDemo/login/controller/LoginViewController.m"
-            timestampString = "469533957.774886"
+            timestampString = "469596713.778089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
             landmarkName = "-delegeTest"
             landmarkType = "5">
             <Locations>

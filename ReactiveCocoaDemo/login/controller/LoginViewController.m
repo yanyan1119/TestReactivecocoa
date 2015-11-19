@@ -79,8 +79,81 @@
    // [self schedulerSignal];
     
     [self timeOutSignal];
+    
+    [self retrySignal];
+    
+    [self throttleSignal];
+    
+    [self takeUntilSignal];
 }
 
+//条件
+- (void)takeUntilSignal
+{
+    [[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [[RACSignal interval:1 onScheduler:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+            [subscriber sendNext:@"直到世界尽头才能把我们分开"];
+        }];
+        return nil;
+    }] takeUntil:[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"世界尽头到了  嘿嘿 ");
+            [subscriber sendNext:@"世界尽头到了"];
+        });
+        return nil;
+    }]] subscribeNext:^(id x) {
+        NSLog(@"%@ ",x);
+    }];
+}
+
+//节流
+- (void)throttleSignal
+{
+    [[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [subscriber sendNext:@"第一个"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [subscriber sendNext:@"第二个"];
+        });
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [subscriber sendNext:@"第三个"];
+            [subscriber sendNext:@"第四个"];
+            [subscriber sendNext:@"第五个"];
+            [subscriber sendNext:@"六个"];
+            [subscriber sendNext:@"七个"];
+        });
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [subscriber sendNext:@"第八个"];
+            [subscriber sendNext:@"第九个"];
+            [subscriber sendNext:@"十个"];
+        });
+        return nil;
+    }]throttle:1] subscribeNext:^(id x) {
+        NSLog(@"%@都通过了",x);
+    }];
+}
+
+//重试
+- (void)retrySignal
+{
+    __block NSInteger count = 0;
+    [[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        if (count < 5) {
+            count ++;
+            NSLog(@"发送失败了，再来一次");
+            [subscriber sendError:nil];
+        }
+        else
+        {
+            NSLog(@"发送失败了五次");
+            [subscriber sendNext:@""];
+        }
+        return nil;
+    }] retry] subscribeNext:^(id x) {
+        NSLog(@"终于发送成功了！");
+    } error:^(NSError *error) {
+        NSLog(@"发送失败 %@ 次",@(count));
+    }];
+}
 
 //超时
 - (void)timeOutSignal
@@ -545,6 +618,11 @@
         @strongify(self)
         //to do login error
     }];
+}
+
+
+- (void)finishLogin
+{
 }
 
 
